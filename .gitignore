@@ -1,0 +1,6 @@
+# .gitignore
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfvars # часто містять секрети
+!example.tfvars # а зразок — комітимо
