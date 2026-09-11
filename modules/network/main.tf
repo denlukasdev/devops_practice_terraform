@@ -1,17 +1,7 @@
-locals {
-  name_prefix = "${var.project}-${var.env}"
-  common_tags = {
-    Project   = var.project
-    Env       = var.env
-    ManagedBy = "terraform"
-  }
-}
-
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
-  tags                 = merge(local.common_tags, { Name = "${local.name_prefix}-vpc" })
-  # tags                 = { Name = "${var.project}-vpc" }
+  tags                 = merge(var.tags, { Name = "${var.name_prefix}-vpc" })
   lifecycle {
     prevent_destroy = false
   }
@@ -47,14 +37,8 @@ resource "aws_route_table_association" "private" {
 resource "aws_subnet" "net" {
   for_each = var.subnets
   vpc_id   = aws_vpc.main.id
-  # cidr_block        = each.value.cidr
   cidr_block        = cidrsubnet(var.vpc_cidr, 8, each.value.netnum)
   availability_zone = "${var.region}${each.value.az}"
   tags              = { Name = "${var.project}-${each.key}" }
 }
 
-
-moved {
-  from = aws_subnet.this
-  to   = aws_subnet.net
-}

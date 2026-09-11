@@ -4,6 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.terraform" />
       <excludeFolder url="file://$MODULE_DIR$/protected/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/oidc/.terraform" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
