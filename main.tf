@@ -1,7 +1,6 @@
 # main.tf
 locals {
   env         = terraform.workspace
-  test         = "test"
   name_prefix = "${var.project}-${local.env}"
   common_tags = {
     Project   = var.project
